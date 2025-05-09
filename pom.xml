@@ -59,7 +59,7 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- Jakarta Persistence API-->
+        <!-- Jakarta Persistence API -->
         <dependency>
             <groupId>jakarta.inject</groupId>
             <artifactId>jakarta.inject-api</artifactId>
