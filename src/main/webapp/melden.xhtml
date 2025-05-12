@@ -10,42 +10,57 @@
 </h:head>
 <h:body>
     <h:form>
+
+        <p:messages showDetail="true" closable="true" />
+
         <!-- Hauptpanel für das Meldeformular -->
         <p:panel header="Geisternetz melden">
 
             <!-- Eingabefelder in zwei Spalten angeordnet -->
             <h:panelGrid columns="2">
+
                 <h:outputLabel for="laengengrad" value="Längengrad:" />
-                <p:inputText id="laengengrad" value="#{geisternetzController.geisternetz.laengengrad}" required="true" />
+                <p:inputText id="laengengrad"
+                             value="#{gemeldetController.geisternetz.laengengrad}"
+                             required="true"
+                             requiredMessage="Bitte geben Sie den Längengrad an." />
 
                 <h:outputLabel for="breitengrad" value="Breitengrad:" />
-                <p:inputText id="breitengrad" value="#{geisternetzController.geisternetz.breitengrad}" required="true" />
+                <p:inputText id="breitengrad"
+                             value="#{gemeldetController.geisternetz.breitengrad}"
+                             required="true"
+                             requiredMessage="Bitte geben Sie den Breitengrad an." />
 
                 <h:outputLabel for="groesse" value="Größe (m²):" />
-                <p:inputText id="groesse" value="#{geisternetzController.geisternetz.geschaetzteGroesse}" required="true" />
-
-                <h:outputLabel for="status" value="Status:" />
-                <p:selectOneMenu id="status" value="#{geisternetzController.geisternetz.status}" required="true">
-                    <f:selectItem itemLabel="Bitte wählen..." itemValue="" noSelectionOption="true" />
-                    <f:selectItems value="#{geisternetzController.statusList}" var="s" itemLabel="#{s}" itemValue="#{s}" />
-                </p:selectOneMenu>
+                <p:inputText id="groesse"
+                             value="#{gemeldetController.geisternetz.geschaetzteGroesse}"
+                             required="true"
+                             requiredMessage="Bitte geben Sie die geschätzte Größe an." />
 
                 <h:outputLabel for="vorname" value="Vorname (optional):" />
-                <p:inputText id="vorname" value="#{geisternetzController.person.vorname}" required="true" />
+                <p:inputText id="vorname"
+                             value="#{gemeldetController.person.vorname}" />
 
                 <h:outputLabel for="nachname" value="Nachname (optional):" />
-                <p:inputText id="nachname" value="#{geisternetzController.person.nachname}" required="true" />
+                <p:inputText id="nachname"
+                             value="#{gemeldetController.person.nachname}" />
 
                 <h:outputLabel for="telefonnummer" value="Telefonnummer (optional):" />
-                <p:inputText id="telefonnummer" value="#{geisternetzController.person.telefonnummer}" required="true" />
+                <p:inputText id="telefonnummer"
+                             value="#{gemeldetController.person.telefonnummer}" />
             </h:panelGrid>
 
             <!-- Speichern-Button -->
             <p:commandButton value="Melden"
-                             action="#{geisternetzController.speichern}"
+                             action="#{gemeldetController.speichern}"
                              icon="pi pi-check"
                              styleClass="p-button-rounded p-button-success p-mt-3"
                              update="@form" />
+
+            <p:button value="Zurück zur Startseite"
+                      outcome="startseite"
+                      icon="pi pi-home"
+                      style="margin-left:10px" />
         </p:panel>
     </h:form>
 </h:body>

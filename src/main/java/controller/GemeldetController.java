@@ -8,7 +8,7 @@ import model.*;
 // CDI-Bean für die Verarbeitung von Geisternetzen
 @Named
 @RequestScoped
-public class GeisternetzController {
+public class GemeldetController {
 
     //Modellobjekt für das zu meldende Geisternetz und die zugehörige Person
     private Geisternetz geisternetz = new Geisternetz();
@@ -24,11 +24,6 @@ public class GeisternetzController {
         return person;
     }
 
-    // Gibt alle möglichen Statuswerte zurück
-    public List<Status> getStatusList() {
-        return Arrays.asList(Status.values());
-    }
-
     // Methode zur Speicherung des Geisternetz-Objektes in der Datenbank
     public String speichern() {
         // EntityManagerFactory und EntityManager initialisieren
@@ -38,13 +33,14 @@ public class GeisternetzController {
         em.getTransaction().begin(); // Transaktion beginnen
 
         em.persist(person); // meldende Person speichern
-        geisternetz.setMeldendePerson(person); // Geisternetz mit Person verknüpfen
+        geisternetz.setBergendMeldendePerson(person); // Geisternetz mit Person verknüpfen
+        geisternetz.setStatus(Status.GEMELDET);
         em.persist(geisternetz); // Geisternetz speichern
 
         em.getTransaction().commit();  // Transaktion abschließen
         emf.close();  //  Factory schließen
         em.close(); // EntityManager schließen
 
-        return "startseite.xhtml"; // Nachdem Speichern zur melden.xhtml umleiten
+        return "startseite.xhtml"; // Nachdem Speichern zur Startseite umleiten
     }
 }

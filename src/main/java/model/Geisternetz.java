@@ -17,8 +17,17 @@ public class Geisternetz {
     @Enumerated(EnumType.STRING)       // Enum wird als String gespeichert
     private Status status;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Person meldendePerson;
+
+    @ManyToOne
+    private Person bergendePerson;
+
+    @ManyToOne
+    private Person bergendMeldendePerson;
+
+    @ManyToOne
+    private Person verschollenMeldendePerson;
 
     public Geisternetz() {} // Standard-Konstruktor
 
@@ -65,5 +74,29 @@ public class Geisternetz {
 
     public void setMeldendePerson(Person meldendePerson) {
         this.meldendePerson = meldendePerson;
+    }
+
+    public Person getBergendePerson() {
+        return bergendePerson;
+    }
+
+    public void setBergendePerson(Person bergendePerson) {
+        this.bergendePerson = bergendePerson;
+    }
+
+    public Person getBergendMeldendePerson() {
+        return bergendMeldendePerson;
+    }
+
+    public void setBergendMeldendePerson(Person bergendePerson) {
+        this.bergendMeldendePerson = bergendePerson;
+    }
+
+    public Person getVerschollenMeldendePerson() {
+        return verschollenMeldendePerson;
+    }
+
+    public void setVerschollenMeldendePerson(Person verschollenPerson) {
+        this.verschollenMeldendePerson = verschollenPerson;
     }
 }
