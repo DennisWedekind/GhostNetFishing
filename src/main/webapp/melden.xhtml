@@ -3,7 +3,6 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 <h:head>
     <title>Geisternetz melden</title>
@@ -11,50 +10,47 @@
 <h:body>
     <h:form>
 
-        <p:messages showDetail="true" closable="true" />
+        <p:messages closable="true" />
 
-        <!-- Hauptpanel für das Meldeformular -->
         <p:panel header="Geisternetz melden">
 
-            <!-- Eingabefelder in zwei Spalten angeordnet -->
             <h:panelGrid columns="2">
-
-                <h:outputLabel for="laengengrad" value="Längengrad:" />
-                <p:inputText id="laengengrad"
-                             value="#{gemeldetController.geisternetz.laengengrad}"
-                             required="true"
-                             requiredMessage="Bitte geben Sie den Längengrad an." />
 
                 <h:outputLabel for="breitengrad" value="Breitengrad:" />
                 <p:inputText id="breitengrad"
-                             value="#{gemeldetController.geisternetz.breitengrad}"
+                             value="#{geisternetzMeldenController.geisternetz.breitengrad}"
                              required="true"
-                             requiredMessage="Bitte geben Sie den Breitengrad an." />
+                             label="Breitengrad" />
+
+                <h:outputLabel for="laengengrad" value="Längengrad:" />
+                <p:inputText id="laengengrad"
+                             value="#{geisternetzMeldenController.geisternetz.laengengrad}"
+                             required="true"
+                             label="Längengrad" />
 
                 <h:outputLabel for="groesse" value="Größe (m²):" />
                 <p:inputText id="groesse"
-                             value="#{gemeldetController.geisternetz.geschaetzteGroesse}"
+                             value="#{geisternetzMeldenController.geisternetz.geschaetzteGroesse}"
                              required="true"
-                             requiredMessage="Bitte geben Sie die geschätzte Größe an." />
+                             label="Größe (m²)" />
 
                 <h:outputLabel for="vorname" value="Vorname (optional):" />
                 <p:inputText id="vorname"
-                             value="#{gemeldetController.person.vorname}" />
+                             value="#{geisternetzMeldenController.person.vorname}" />
 
                 <h:outputLabel for="nachname" value="Nachname (optional):" />
                 <p:inputText id="nachname"
-                             value="#{gemeldetController.person.nachname}" />
+                             value="#{geisternetzMeldenController.person.nachname}" />
 
                 <h:outputLabel for="telefonnummer" value="Telefonnummer (optional):" />
                 <p:inputText id="telefonnummer"
-                             value="#{gemeldetController.person.telefonnummer}" />
+                             value="#{geisternetzMeldenController.person.telefonnummer}" />
+
             </h:panelGrid>
 
-            <!-- Speichern-Button -->
             <p:commandButton value="Melden"
-                             action="#{gemeldetController.speichern}"
+                             action="#{geisternetzMeldenController.geisternetzMelden}"
                              icon="pi pi-check"
-                             styleClass="p-button-rounded p-button-success p-mt-3"
                              update="@form" />
 
             <p:button value="Zurück zur Startseite"
@@ -62,6 +58,7 @@
                       icon="pi pi-home"
                       style="margin-left:10px" />
         </p:panel>
+
     </h:form>
 </h:body>
 </html>

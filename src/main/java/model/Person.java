@@ -2,15 +2,17 @@ package model;
 
 import jakarta.persistence.*;
 
-@Entity //Kennzeichnet Datenbank-Entity Geisternetz
+/**
+ * Repräsentiert eine Person mit den Attributen ID, Vorname, Nachname und Telefonnummer
+ */
+@Entity // JPA-Annotation zur Kennzeichnung als persistente Entität
 public class Person {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; // Primärschlüssel, automatisch generiert
-
-    private String vorname; // Vorname der Person
-    private String nachname; // Nachname der Person
+    @Id // Primärschlüssel
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Automatisch generierte ID
+    private Long id;              // Eindeutige ID Person
+    private String vorname;       // Vorname der Person
+    private String nachname;      // Nachname der Person
     private String telefonnummer; // Telefonnummer der Person
 
     // Standard-Konstruktor
