@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Geisternetz zur Bergung auswählen</title>
+</h:head>
+<h:body>
+
+    <h:form>
+        <p:messages showDetail="true" closable="true" />
+
+        <p:panel header="Geisternetz zur Bergung auswählen">
+            <h:panelGrid columns="2" cellpadding="5">
+
+                <h:outputLabel value="Geisternetz auswählen:" for="geisternetzId" />
+                <p:selectOneMenu id="geisternetzId"
+                                 value="#{geisternetzBergenController.geisternetzId}"
+                                 required="true"
+                                 requiredMessage="Bitte wählen Sie ein Geisternetz aus.">
+                    <f:selectItem itemLabel="Bitte wählen..." itemValue="" noSelectionOption="true"/>
+                    <f:selectItems value="#{geisternetzBergenController.gemeldeteGeisternetze}"
+                                   var="netz"
+                                   itemValue="#{netz.id}"
+                                   itemLabel="Netz #{netz.id} – Größe: #{netz.geschaetzteGroesse} m², Breitengrad: #{netz.breitengrad}, Längengrad: #{netz.laengengrad}" />
+
+                </p:selectOneMenu>
+
+                <h:outputLabel value="Vorname:" for="vorname" />
+                <p:inputText id="vorname"
+                             value="#{geisternetzBergenController.person.vorname}"
+                             required="true"
+                             requiredMessage="Bitte geben Sie Ihren Vornamen an." />
+
+                <h:outputLabel value="Nachname:" for="nachname" />
+                <p:inputText id="nachname"
+                             value="#{geisternetzBergenController.person.nachname}"
+                             required="true"
+                             requiredMessage="Bitte geben Sie Ihren Nachnamen an." />
+
+                <h:outputLabel value="Telefonnummer:" for="telefonnummer" />
+                <p:inputText id="telefonnummer"
+                             value="#{geisternetzBergenController.person.telefonnummer}"
+                             required="true"
+                             requiredMessage="Bitte geben Sie Ihre Telefonnummer an." />
+
+            </h:panelGrid>
+
+            <p:commandButton value="Zur Bergung anmelden"
+                             action="#{geisternetzBergenController.geisternetzBergungAnkuendigen()}"
+                             icon="pi pi-save"
+                             update="@form" />
+
+            <p:button value="Zurück zur Startseite"
+                      outcome="startseite"
+                      icon="pi pi-home"
+                      style="margin-left:10px" />
+        </p:panel>
+    </h:form>
+</h:body>
+</html>

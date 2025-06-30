@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Geisternetz als verschollen melden</title>
+</h:head>
+<h:body>
+
+    <h:form>
+
+        <p:messages showDetail="true" closable="true" />
+
+        <p:panel header="Geisternetz als verschollen melden">
+            <h:panelGrid columns="2" cellpadding="5">
+
+                <h:outputLabel value="Geisternetz auswählen:" for="geisternetzId" />
+                <p:selectOneMenu id="geisternetzId"
+                                 value="#{geisternetzVerschollenController.geisternetzId}"
+                                 required="true"
+                                 requiredMessage="Bitte wählen Sie ein Geisternetz aus.">
+                    <f:selectItem itemLabel="Bitte wählen..." itemValue="" noSelectionOption="true"/>
+                    <f:selectItems value="#{geisternetzVerschollenController.gemeldeteGeisternetze}"
+                                   var="netz"
+                                   itemValue="#{netz.id}"
+                                   itemLabel="Netz #{netz.id} – Größe: #{netz.geschaetzteGroesse} m², Breitengrad: #{netz.breitengrad}, Längengrad: #{netz.laengengrad}" />
+                </p:selectOneMenu>
+
+                <h:outputLabel value="Vorname:" for="vorname" />
+                <p:inputText id="vorname"
+                             value="#{geisternetzVerschollenController.person.vorname}"
+                             required="true"
+                             requiredMessage="Bitte geben Sie Ihren Vornamen an." />
+
+                <h:outputLabel value="Nachname:" for="nachname" />
+                <p:inputText id="nachname"
+                             value="#{geisternetzVerschollenController.person.nachname}"
+                             required="true"
+                             requiredMessage="Bitte geben Sie Ihren Nachnamen an." />
+
+                <h:outputLabel value="Telefonnummer:" for="telefonnummer" />
+                <p:inputText id="telefonnummer"
+                             value="#{geisternetzVerschollenController.person.telefonnummer}"
+                             required="true"
+                             requiredMessage="Bitte geben Sie Ihre Telefonnummer an." />
+            </h:panelGrid>
+
+            <p:commandButton value="Als verschollen melden"
+                             action="#{geisternetzVerschollenController.geisternetzVerschollenMelden()}"
+                             icon="pi pi-check"
+                             update="@form" />
+
+            <p:button value="Zurück zur Startseite"
+                      outcome="startseite"
+                      icon="pi pi-home"
+                      style="margin-left:10px" />
+        </p:panel>
+    </h:form>
+
+</h:body>
+</html>
