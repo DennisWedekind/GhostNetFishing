@@ -19,6 +19,16 @@ public class GeisternetzBergenController {
     private Long geisternetzId;
     private Person person = new Person();
 
+    // Methoden
+    public List<Geisternetz> getGemeldeteGeisternetze() {
+        return service.findeGeisternetzeMitStatus(Status.Gemeldet);
+    }
+
+    public String geisternetzBergungAnkuendigen() {
+        service.bergungAnmelden(geisternetzId, person);
+        return "startseite.xhtml";
+    }
+
     // Getter und Setter
     public Long getGeisternetzId() {
         return geisternetzId;
@@ -36,13 +46,5 @@ public class GeisternetzBergenController {
         this.person = person;
     }
 
-    // Methoden
-    public List<Geisternetz> getGemeldeteGeisternetze() {
-        return service.findeGeisternetzeMitStatus(Status.Gemeldet);
-    }
 
-    public String geisternetzBergungAnkuendigen() {
-        service.bergungAnmelden(geisternetzId, person);
-        return "startseite.xhtml";
-    }
 }

@@ -11,13 +11,21 @@ import service.GeisternetzService;
 @RequestScoped
 public class GeisternetzMeldenController {
 
+    // Injected Service zur Verarbeitung der Geisternetzmeldung
     @Inject
     private GeisternetzService service;
 
+    // Objekte für Formularbindung
     private Person person = new Person();
     private Geisternetz geisternetz = new Geisternetz();
 
-    // Getter und Setter
+    // Methode zur Auslösung der Service-Logik bei Formular-Absenden
+    public String geisternetzMelden() {
+        service.meldenGeisternetz(geisternetz, person);
+        return "startseite.xhtml";
+    }
+
+    // Getter und Setter für Formularbindung
     public Person getPerson() {
         return person;
     }
@@ -34,9 +42,4 @@ public class GeisternetzMeldenController {
         this.geisternetz = geisternetz;
     }
 
-    // Business-Methode: Geisternetz melden
-    public String geisternetzMelden() {
-        service.meldenGeisternetz(geisternetz, person);
-        return "startseite.xhtml";
-    }
 }

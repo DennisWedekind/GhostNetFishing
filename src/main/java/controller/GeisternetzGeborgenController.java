@@ -14,11 +14,22 @@ import service.GeisternetzService;
 @RequestScoped
 public class GeisternetzGeborgenController {
 
+    private Long geisternetzId;
+    private Person person = new Person();
+
     @Inject
     private GeisternetzService service;
 
-    private Long geisternetzId;
-    private Person person = new Person();
+    // Liste der Geisternetze mit Status "Bergung bevorstehend"
+    public List<Geisternetz> getAngekuendigteGeisternetze() {
+        return service.findeGeisternetzeMitStatus(Status.BergungBevorstehend);
+    }
+
+    // Methode zum Melden der Bergung als abgeschlossen
+    public String geisternetzGeborgenMelden() {
+        service.alsGeborgenMelden(geisternetzId, person);
+        return "startseite.xhtml";
+    }
 
     // Getter und Setter
     public Long getGeisternetzId() {
@@ -37,14 +48,5 @@ public class GeisternetzGeborgenController {
         this.person = person;
     }
 
-    // Liste der Geisternetze mit Status "Bergung bevorstehend"
-    public List<Geisternetz> getAngekuendigteGeisternetze() {
-        return service.findeGeisternetzeMitStatus(Status.BergungBevorstehend);
-    }
 
-    // Methode zum Melden der Bergung als abgeschlossen
-    public String geisternetzGeborgenMelden() {
-        service.alsGeborgenMelden(geisternetzId, person);
-        return "startseite.xhtml";
-    }
 }

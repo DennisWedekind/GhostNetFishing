@@ -23,28 +23,31 @@ public class GeisternetzService {
     private PersonService personService;
 
 
-    // Prüft, ob Geisternetz schon existiert, sonst speichern
+    // Prüft, ob ein Geisternetz mit denselben Eigenschaften bereits existiert.
+    // Wenn ja, wird das vorhandene Objekt zurückgegeben,
+    // andernfalls wird das neue Geisternetz gespeichert und zurückgegeben.
     public Geisternetz findeOderErstelleGeisternetz(Geisternetz geisternetz) {
         Geisternetz vorhandenesGeisternetz = geisternetzDAO.findeGeisternetz(
                 geisternetz.getBreitengrad(),
                 geisternetz.getLaengengrad(),
                 geisternetz.getGeschaetzteGroesse()
         );
-
         if (vorhandenesGeisternetz != null) {
+            // Bereits vorhandenes Netz gefunden – dieses wird verwendet
             return vorhandenesGeisternetz;
         } else {
             geisternetzDAO.speichereGeisternetz(geisternetz);
+            // Kein bestehender Eintrag – neues Geisternetz wird gespeichert
             return geisternetz;
         }
     }
 
-    // Geisternetz melden
+    // Geisternetz mit Person verknüpfen und als "Gemeldet" speichern
     public void meldenGeisternetz(Geisternetz geisternetz, Person person) {
         Person gespeichertePerson = personService.findeOderErstellePerson(person);
-        geisternetz.setMeldendePerson(gespeichertePerson);
-        geisternetz.setStatus(Status.Gemeldet);
-        findeOderErstelleGeisternetz(geisternetz);
+        geisternetz.setMeldendePerson(gespeichertePerson); // Geisternetz zuordnen
+        geisternetz.setStatus(Status.Gemeldet); // Setzen des Status auf „Gemeldet“
+        findeOderErstelleGeisternetz(geisternetz); // Geisternetz speichern oder vorhandenes verwenden
     }
 
     // Bergung anmelden
